@@ -1,6 +1,10 @@
 package cm.laboacademy.inscriptions;
 
+import java.time.LocalDate;
+
 public class FraisInscription {
+
+    private static final LocalDate DATE_LIMITE = LocalDate.of(2026, 9, 30);
 
     public int calculer(String niveau, boolean boursier) {
         int frais;
@@ -28,5 +32,13 @@ public class FraisInscription {
         }
 
         return frais;
+    }
+
+    public int calculer(String niveau, boolean boursier, LocalDate dateInscription) {
+        int montant = calculer(niveau, boursier);
+        if (dateInscription.isBefore(DATE_LIMITE)) {
+            montant = montant * 90 / 100;
+        }
+        return montant;
     }
 }
